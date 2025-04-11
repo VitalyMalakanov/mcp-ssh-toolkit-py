@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  mcp-ssh-toolkit-py:
+    build: .
+    image: mcp-ssh-toolkit-py
+    container_name: mcp-ssh-toolkit-py
+    stdin_open: true
+    tty: true
+    environment:
+      - SSH_DEFAULT_USER=youruser
+      - SSH_DEFAULT_PORT=22
+      - SSH_DEFAULT_TIMEOUT=20
