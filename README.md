@@ -39,12 +39,27 @@ It allows LLMs and MCP-compatible clients (like Claude/Cline) to securely execut
 
 ## Installation
 
+### Docker (рекомендуемый способ)
+
 Clone the repository and build the Docker image:
 
 ```bash
 git clone https://github.com/VitalyMalakanov/mcp-ssh-toolkit-py.git
 cd mcp-ssh-toolkit-py
 docker build -t mcp-ssh-toolkit-py .
+```
+
+### Установка через pip
+
+Вы также можете установить пакет напрямую через pip:
+
+```bash
+pip install git+https://github.com/VitalyMalakanov/mcp-ssh-toolkit-py.git
+```
+
+После установки сервер можно запустить командой:
+```bash
+python -m mcp_ssh_toolkit
 ```
 
 ---
