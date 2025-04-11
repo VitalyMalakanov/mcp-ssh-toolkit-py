@@ -1,1 +1,0 @@
-mcp-ssh-toolkit-py sftp upload test

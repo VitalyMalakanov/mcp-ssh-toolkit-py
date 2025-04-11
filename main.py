@@ -5,7 +5,7 @@ A minimal MCP server for secure SSH automation using fast_mcp_server.
 Exposes SSH tools via the Model Context Protocol (MCP).
 Compatible with Claude/Cline and other MCP clients.
 
-Author: Your Name
+Author: Vitaly Malakanov and AI Cline
 License: MIT
 """
 
@@ -36,7 +36,7 @@ async def ssh_execute_command(arguments: dict) -> dict:
     try:
         with paramiko.SSHClient() as ssh:
             ssh.load_system_host_keys()
-            ssh.set_missing_host_key_policy(paramiko.WarningPolicy())
+            ssh.set_missing_host_key_policy(paramiko.RejectPolicy())
             if privateKey:
                 ssh.connect(host, port=port, username=username, password=password, key_filename=privateKey, timeout=timeout)
             else:
@@ -77,7 +77,7 @@ async def sftp_upload(arguments: dict) -> dict:
     try:
         with paramiko.SSHClient() as ssh:
             ssh.load_system_host_keys()
-            ssh.set_missing_host_key_policy(paramiko.WarningPolicy())
+            ssh.set_missing_host_key_policy(paramiko.RejectPolicy())
             if privateKey:
                 ssh.connect(host, port=port, username=username, password=password, key_filename=privateKey, timeout=timeout)
             else:
@@ -115,7 +115,7 @@ async def sftp_download(arguments: dict) -> dict:
     try:
         with paramiko.SSHClient() as ssh:
             ssh.load_system_host_keys()
-            ssh.set_missing_host_key_policy(paramiko.WarningPolicy())
+            ssh.set_missing_host_key_policy(paramiko.RejectPolicy())
             if privateKey:
                 ssh.connect(host, port=port, username=username, password=password, key_filename=privateKey, timeout=timeout)
             else:

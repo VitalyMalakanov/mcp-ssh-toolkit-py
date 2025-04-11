@@ -1,8 +1,9 @@
 # mcp-ssh-toolkit-py
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/yourusername/mcp-ssh-toolkit-py/actions)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/VitalyMalakanov/mcp-ssh-toolkit-py/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Docker](https://img.shields.io/badge/docker-ready-blue)](https://hub.docker.com/r/yourusername/mcp-ssh-toolkit-py)
+[![Docker](https://img.shields.io/badge/docker-ready-blue)](https://hub.docker.com/r/vitalymalakanov/mcp-ssh-toolkit-py)
+[![Author](https://img.shields.io/badge/author-Vitaly_Malakanov_&_AI_Cline-blue)](https://github.com/VitalyMalakanov)
 
 A minimal Model Context Protocol (MCP) server for secure SSH automation, built with [python-sdk](https://github.com/modelcontextprotocol/python-sdk) and [paramiko](https://www.paramiko.org/).
 
@@ -41,7 +42,7 @@ It allows LLMs and MCP-compatible clients (like Claude/Cline) to securely execut
 Clone the repository and build the Docker image:
 
 ```bash
-git clone https://github.com/yourusername/mcp-ssh-toolkit-py.git
+git clone https://github.com/VitalyMalakanov/mcp-ssh-toolkit-py.git
 cd mcp-ssh-toolkit-py
 docker build -t mcp-ssh-toolkit-py .
 ```
@@ -121,54 +122,6 @@ python main.py
 
 ---
 
-## Example Code
-
-```python
-import paramiko
-from mcp.server.fastmcp import FastMCP
-
-mcp = FastMCP("mcp-ssh-toolkit-py")
-
-@mcp.tool()
-def ssh_execute_command(
-    host: str,
-    username: str,
-    password: str = None,
-    privateKey: str = None,
-    command: str = "",
-    port: int = 22,
-    timeout: int = 20
-) -> dict:
-    ssh = paramiko.SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    try:
-        if privateKey:
-            pkey = paramiko.RSAKey.from_private_key_file(privateKey)
-            ssh.connect(host, port=port, username=username, pkey=pkey, timeout=timeout)
-        else:
-            ssh.connect(host, port=port, username=username, password=password, timeout=timeout)
-        stdin, stdout, stderr = ssh.exec_command(command, timeout=timeout)
-        out = stdout.read().decode()
-        err = stderr.read().decode()
-        exit_code = stdout.channel.recv_exit_status()
-        ssh.close()
-        return {
-            "stdout": out,
-            "stderr": err,
-            "exit_code": exit_code
-        }
-    except Exception as e:
-        return {
-            "stdout": "",
-            "stderr": str(e),
-            "exit_code": -1
-        }
-
-if __name__ == "__main__":
-    mcp.run()
-```
-
----
 
 ## Security
 
