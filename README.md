@@ -21,45 +21,97 @@ A minimal Model Context Protocol (MCP) server for secure SSH automation, built w
 
 ---
 
-## Overview
+## Overview 🚀
 
-**mcp-ssh-toolkit-py** exposes an SSH command execution tool via the Model Context Protocol (MCP).  
-It allows LLMs and MCP-compatible clients (like Claude/Cline) to securely execute commands on remote servers via SSH.
+**mcp-ssh-toolkit-py** is a powerful MCP server for secure SSH command execution via Model Context Protocol.
+
+🔹 **Key Features**:
+- Execute arbitrary commands on remote servers via SSH
+- Upload/download files via SFTP
+- Integration with Claude/Cline and other MCP clients
+- Supports password and SSH key authentication
+- Configurable connection parameters (timeouts, ports)
+
+🔹 **Use Cases**:
+- DevOps automation via LLMs
+- Server management through chat interface
+- Secure remote script execution
+- SSH integration in MCP ecosystem
+
+Example usage:
+```python
+# Through MCP client
+response = mcp.tool("ssh_execute_command", {
+    "host": "example.com",
+    "username": "user",
+    "command": "docker ps"
+})
+```
 
 ---
 
-## Features
+## Features ✨
 
-- Exposes an SSH command execution tool via MCP
-- Works with Claude/Cline and other MCP-compatible clients
-- Runs in Docker for easy deployment and isolation
-- Simple, extensible Python codebase
+### Core Functionality
+- 🛡️ Secure SSH command execution via MCP
+- 📁 SFTP operations (file upload/download)
+- 🔑 Multiple authentication methods:
+  - Username/password
+  - SSH keys (RSA)
+  - SSH agent
+
+### Integration
+- 🤖 Full compatibility with Claude/Cline
+- 🐳 Ready-to-use Docker image
+- 📦 Pip package installation
+
+### Security
+- 🔒 Encrypted connections
+- ⏱ Configurable timeouts
+- 🚫 No credential storage
 
 ---
 
-## Installation
+## Installation 📦
 
-### Docker (рекомендуемый способ)
+### Docker (Recommended)
 
-Clone the repository and build the Docker image:
-
+1. Clone the repository:
 ```bash
 git clone https://github.com/VitalyMalakanov/mcp-ssh-toolkit-py.git
 cd mcp-ssh-toolkit-py
+```
+
+2. Build the Docker image:
+```bash
 docker build -t mcp-ssh-toolkit-py .
 ```
 
-### Установка через pip
+3. (Optional) Push to your Docker registry:
+```bash
+docker tag mcp-ssh-toolkit-py yourusername/mcp-ssh-toolkit-py
+docker push yourusername/mcp-ssh-toolkit-py
+```
 
-Вы также можете установить пакет напрямую через pip:
+### Pip Installation
 
+Install directly from GitHub:
 ```bash
 pip install git+https://github.com/VitalyMalakanov/mcp-ssh-toolkit-py.git
 ```
 
-После установки сервер можно запустить командой:
+Run the server after installation:
 ```bash
 python -m mcp_ssh_toolkit
+```
+
+### Development Setup
+
+For development, install with:
+```bash
+git clone https://github.com/VitalyMalakanov/mcp-ssh-toolkit-py.git
+cd mcp-ssh-toolkit-py
+pip install -e .
 ```
 
 ---
